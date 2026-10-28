@@ -1,3 +1,4 @@
+import argparse
 THRESHOLD = 2
 
 
@@ -21,17 +22,23 @@ def analyze_log(path):
     return count, fail_counts
 
 
-def show_report(count, fail_counts):
+def show_report(count, fail_counts, threshold):
     print(f"失敗回数:{count}")
     print()
     print("IPごとの失敗回数")
     for ip, num in fail_counts.items():
         print(f"{ip}: {num}回")
     print()
-    print(f"[!]不審なIP（失敗 {THRESHOLD}回以上）")
+    print(f"[!]不審なIP（失敗 {threshold}回以上）")
     for ip, num in fail_counts.items():
-        if num >= THRESHOLD:
+        if num >= threshold:
             print(f"{ip}: {num}回")
+
+
+parser = argparse.ArgumentParser(description="ログイン失敗ログから不審なIPを検出するツール")
+parser.add_argument("logfile", help = "解析するログインファイルのパス")
+parser.add_argument("--threshold", type=int, default=THRESHOLD, help="不審と判断する失敗回数のしきい値")
+args = parser.parse_args()
 
 
 count, fail_counts = analyze_log("sample_logs/auth.log")
