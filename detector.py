@@ -6,6 +6,12 @@ logs = [
     "2026-10-19 10:23:02 FAILED login from 198.51.100.4 user=test",
 ]
 
+count = 0
 for log in logs:
     if "FAILED" in log:
-        print(log)
+        parts = log.split()
+        ip = parts[5]
+        user = parts[6].split('=')[1]
+        print(f"{ip} -> {user}")
+        count += 1
+print(f'失敗回数：{count}')
