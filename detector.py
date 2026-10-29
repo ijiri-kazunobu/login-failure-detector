@@ -41,5 +41,5 @@ parser.add_argument("--threshold", type=int, default=THRESHOLD, help="不審と�
 args = parser.parse_args()
 
 
-count, fail_counts = analyze_log("sample_logs/auth.log")
-show_report(count, fail_counts)
+count, fail_counts = analyze_log(args.logfile)
+show_report(count, fail_counts, args.threshold)
