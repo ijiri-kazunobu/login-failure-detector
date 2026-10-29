@@ -36,7 +36,7 @@ def show_report(count, fail_counts, threshold):
 
 
 parser = argparse.ArgumentParser(description="ログイン失敗ログから不審なIPを検出するツール")
-parser.add_argument("logfile", help = "解析するログインファイルのパス")
+parser.add_argument("logfile", help = "解析するログファイルのパス")
 parser.add_argument("--threshold", type=int, default=THRESHOLD, help="不審と判断する失敗回数のしきい値")
 args = parser.parse_args()
 
